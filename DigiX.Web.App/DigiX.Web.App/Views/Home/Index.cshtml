@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DigiX.Web.Global.Objects.Product>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-6">
+            <h2>@product.Name</h2>
+            <h3>@product.Sku</h3>
+            <h4>$@product.Price</h4>
+        </div>
+    }
+</div>
+<hr />
+<div class="row">
+    @using (Html.BeginForm("CheckOut", "Home", FormMethod.Post))
+    {
+        <div class="form-group">
+            <div class="col-md-12">
+                <input id="itemSkus" name="itemSkus" type="text" class="form-control" placeholder="items SKU (comma separated)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Check Out" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+</div>
+<div class="row">
+    Json Content Length: @ViewBag.JsonContentLength
+    XML Content Length: @ViewBag.XmlContentLength
+</div>

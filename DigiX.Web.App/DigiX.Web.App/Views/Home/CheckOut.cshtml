@@ -1,0 +1,40 @@
+﻿@model IEnumerable<DigiX.Web.Global.Objects.Order>
+@{
+    ViewBag.Title = "Check Out";
+    var checkOutPrice = 0.00;
+}
+<h2>@ViewBag.Title.</h2>
+
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>SKU</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Deals</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                checkOutPrice += order.TotalPrice;
+                <tr>
+                    <td>@order.Product.Sku</td>
+                    <td>@order.Product.Name</td>
+                    <td>@order.Quantity</td>
+                    <td>$@order.TotalPrice</td>
+                    <td>@(order.ProductDeals != null ? order.ProductDeals.Note : string.Empty)</td>
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Total</td>
+                <td>$@checkOutPrice</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
